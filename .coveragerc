@@ -1,0 +1,18 @@
+[report]
+;exclude import statements
+exclude_also =
+    import math
+    import itertools
+    import bisect
+    import collections
+    import string
+    import heapq
+    import functools
+    import sortedcontainers
+    import operator
+    from typing import List, Dict, Tuple, Iterator*
+    from math import sqrt
+    from bisect import bisect_left*
+    from dataclasses import dataclass
+    import *
+    from * import *
