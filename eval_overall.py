@@ -2,34 +2,16 @@ import os
 import subprocess
 import json
 import signal
-import tempfile
 import random
 random.seed(42)
-import ast
 import shutil
 import time
 import re
-import math
-import textwrap
 from pathlib import Path
 from tqdm import tqdm
 from argparse import ArgumentParser
 from copy import deepcopy
 from data_utils import read_jsonl
-
-
-ADDITIONAL_IMPORTS="""
-import math
-import itertools
-import bisect
-import collections
-import string
-import heapq
-import functools
-import sortedcontainers
-from typing import List, Dict, Tuple, Iterator
-
-"""
 
 
 class TimeoutHandler:
@@ -53,8 +35,7 @@ def execute(test_code,timeout=5):
     try:
         exec_globals = {}
         with TimeoutHandler(timeout):
-        #with time_limit(timeout):
-            exec(test_code, globals()) #add globals() to avoid nameerrors related to import
+            exec(test_code, globals()) 
             return True
     except AssertionError: #assertionerror is considered as executable
         return True
@@ -64,11 +45,6 @@ def execute(test_code,timeout=5):
     except Exception as e:
         #print(f"failed: {type(e).__name__}")
         return type(e).__name__, e #return error type and error message
-    
-
-def run_coverage_group(passed_tests, cov_command_prefix):
-    """Run coverage for a group of test cases."""
-    pass
     
 
 def coverage_at_k_sample(passed_tests, k, cov_command_prefix):
@@ -108,7 +84,6 @@ def coverage_at_k_sample(passed_tests, k, cov_command_prefix):
 
     avg_line_cov=sum(split_line_covs)/len(split_line_covs)
     avg_branch_cov=sum(split_branch_covs)/len(split_branch_covs)
-    #print(f'Coverage@{k} Line: {avg_line_cov}, Branch: {avg_branch_cov}')
     return {'line_cov':avg_line_cov,'branch_cov':avg_branch_cov}
         
     
@@ -166,13 +141,13 @@ def check_correctness(generated_data,ks=[1, 2, 5]):
                         passed_tests.append(f'test_{j}.py')
                 else:
                     exec_fails.append({'task':task_num,'test_num':j,'error':res})
-                    print(res)
-                    print(test_code)
+                    #print(res)
+                    #print(test_code)
 
             except:
                 syn_failed+=1
-                print('syntax error')
-                print(testcase)
+                #print('syntax error')
+                #print(testcase)
                 pass
         
         if len(passed_tests)>0: #start measuring coverage
@@ -234,30 +209,10 @@ def check_correctness(generated_data,ks=[1, 2, 5]):
     print(f'Average Line Coverage: {avg_line_cov}, Average Branch Coverage: {avg_branch_cov}')
     return {'syn_correct':syn_correct,'exec_correct':exec_correct}, exec_fails
 
-
-def check_correctness_with_difficulty(generated_data, ks=[1, 2, 5]):
-    easy_data=[]
-    medium_data=[]
-    hard_data=[]
-    for data in generated_data:
-        if data['difficulty']==1:
-            easy_data.append(data)
-        elif data['difficulty']==2:
-            medium_data.append(data)
-        elif data['difficulty']==3:
-            hard_data.append(data)
-    print('easy:', len(easy_data), 'medium:', len(medium_data), 'hard:', len(hard_data))
-    
-    print('Evaluating easy problems...')
-    check_correctness(easy_data, ks=ks)
-    print('Evaluating medium problems...')
-    check_correctness(medium_data, ks=ks)
-    print('Evaluating hard problems...')
-    check_correctness(hard_data, ks=ks)
     
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("--path", type=str, default='totalcov_python_gpt-3.5-turbo.jsonl')
+    parser.add_argument("--path", type=str, default='totalcov_gpt-3.5-turbo.jsonl')
     parser.add_argument("--ks", type=int, nargs='+', default=[1, 2, 5])
     return parser.parse_args()
 
@@ -271,4 +226,3 @@ if __name__=='__main__':
     print(len(predictions))
 
     check_correctness(predictions, ks=args.ks)
-    #check_correctness_with_difficulty(predictions, ks=[1, 2, 5])
