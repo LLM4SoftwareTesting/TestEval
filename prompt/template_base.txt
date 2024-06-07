@@ -1,0 +1,15 @@
+Please write a test method for the function '{func_name}' given the following program under test and function description. Your answer should only contain one test input.
+
+Program under test:
+----
+{program}
+----
+
+Function description for '{func_name}':
+----
+{description}
+----
+
+Your test method should begin with:
+def test_{func_name}():
+    solution=Solution()
