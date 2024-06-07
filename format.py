@@ -3,7 +3,6 @@ import textwrap
 import ast
 from pathlib import Path
 from argparse import ArgumentParser
-from tqdm import tqdm
 
 from data_utils import read_jsonl, write_jsonl
 
@@ -33,10 +32,7 @@ def reformat_case_byrules(testcase, func_name, lang='python'):
     if testcase.startswith(' '): #remove extra indents (encountered in codellama, mistral-7b starts with one space...)
         testcase=textwrap.dedent(testcase)
     lines=testcase.split('\n')
-    #if testcase.find('```')>=0: #sometimes the generated test case is in markdown format (``` at beginning and end) 
-        #lines=lines[1:]
-        #if lines[-1].find('```')>=0:
-            #lines=lines[:-1]
+
     if lang=='python':
         last_line=lines[-1] #if last line is not complete (due to token limit), remove it    
         last_line=textwrap.dedent(last_line)
@@ -52,7 +48,7 @@ def reformat_case_byrules(testcase, func_name, lang='python'):
 
 
 def remove_extra(testcase, func_name, lang='python'):
-    """Remove extra test inputs and natural language descriptions before and after thhe test method.
+    """Remove extra test inputs and natural language descriptions before and after the test method.
     Only keep the contents between def test() and solution.{func_name}"""
     lines=testcase.split('\n')
     func_startline=0 #the line when test function starts (def test....)
@@ -133,25 +129,6 @@ def reformat_branch(datapath,newpath):
     write_jsonl(formatted_data, newpath)
 
 
-def reformat_base(datapath,newpath):
-    data=read_jsonl(datapath)
-    formatted_data=[]
-    for e in data:
-        #print(code)
-        func_name=e['func_name']
-        test_funcname=f'test_{func_name}'
-        testcase=e['test']
-        #formated_tests=[]
-        testcase=remove_extra(testcase, func_name)
-        reformatted_testcase=reformat_case_byrules(testcase, test_funcname, 'python')
-        #print('------')
-        print(reformatted_testcase)
-        e['test']=reformatted_testcase
-
-        formatted_data.append(e)
-    #write_jsonl(formatted_data, newpath)
-
-
 def reformat_cov(datapath,newpath):
     data=read_jsonl(datapath)
     formatted_data=[]
@@ -181,8 +158,8 @@ def reformat_cov(datapath,newpath):
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("--path", type=str, default='Linecov_python_gemini-1.0-pro-latest_base.jsonl')
-    parser.add_argument("--mode", type=str, default='overall', choices=['line', 'branch', 'base', 'overall'])
+    parser.add_argument("--path", type=str, default='Linecov_python_gemini-1.0-pro-latest.jsonl')
+    parser.add_argument("--mode", type=str, default='overall', choices=['line', 'branch', 'overall'])
     return parser.parse_args()
 
 
