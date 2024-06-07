@@ -1,15 +1,10 @@
 import os
-import subprocess
-import json
 import signal
-import tempfile
 import random
 random.seed(42)
-import ast
 import shutil
 import time
 import re
-import math
 from pathlib import Path
 from tqdm import tqdm
 from argparse import ArgumentParser
@@ -38,14 +33,14 @@ def execute(test_code,timeout=5):
         exec_globals = {}
         with TimeoutHandler(timeout):
         #with time_limit(timeout):
-            exec(test_code, globals()) #add globals() to avoid nameerrors related to import
+            exec(test_code, globals()) #add globals() to avoid name errors related to import
             return True
     except AssertionError: #assertionerror is considered as executable
         return True
     except TimeoutError:
         #print("timed out")
         return False
-    except Exception as e: #AssertionError is also considered as not executable (should be discusssed)
+    except Exception as e: 
         #print(f"failed: {type(e).__name__}")
         return type(e).__name__, e #return error type and error message     
     
@@ -53,7 +48,7 @@ def execute(test_code,timeout=5):
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("--path", type=str, default='pathcov_gpt-3.5-turbov0format.jsonl')
+    parser.add_argument("--path", type=str, default='pathcov_gpt-3.5-turboformat.jsonl')
     return parser.parse_args()
 
 
@@ -77,9 +72,8 @@ def match_path(generated_path, ref_path):
 
 def eval_correctness(generated_data):
     """Compute syntactical and execution correctness (with coverage)."""
-    #ref_dataset=read_jsonl('LC_data/tgtpath_condition_v1.jsonl')
-    ref_dataset=read_jsonl('LC_data/tgtpath_condition_5.jsonl')
-    instrumented_dataset=read_jsonl('LC_data/leetcode-bench-py-path-instrumented.jsonl')
+    ref_dataset=read_jsonl('data/tgt_paths.jsonl')
+    instrumented_dataset=read_jsonl('data/leetcode-py-instrumented.jsonl')
     total_cases=0
     total_paths=0
     total_syn_correct=0
@@ -96,7 +90,6 @@ def eval_correctness(generated_data):
         task_num=data['task_num']
         difficulty=data['difficulty']
         func_name=data['func_name']
-        code=data['code']
         task_title=instrumented_dataset[i]['task_title']
         instrumented_code=instrumented_dataset[i]['python_solution_instrumented']
         test_cases=data['tests']
@@ -142,9 +135,7 @@ def eval_correctness(generated_data):
                         if path_sim==1:
                             total_path_match+=1
                         total_path_similarity+=path_sim
-                        #test_code_simple=test_import_simple+testcase #write to files for computing coverage
-                        #with open(f'tmp_{i}_{difficulty}/test_{j}.py','w') as f:
-                            #f.write(test_code_simple)
+
                         passed_tests.append({'path': f'test.py', 'pass': True})
             else:
                 exec_fails.append({'task':task_num,'test_num':j,'error':res})
@@ -153,8 +144,7 @@ def eval_correctness(generated_data):
                 passed_tests.append({'path': f'test.py', 'pass': False})
         except:
             syn_failed+=1
-            print('syntax error')
-            print(baseline_test)
+            #print('syntax error')
             passed_tests.append({'path': f'test.py', 'pass': False})
             pass
         #print(passed_tests)
