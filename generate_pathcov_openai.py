@@ -74,10 +74,3 @@ if __name__=='__main__':
         testing_results.append(testing_data)
 
     write_jsonl(testing_results, output_dir / f'pathcov_{args.model}.jsonl')
-
-
-#versions
-#5_1: remove start and end in condition path
-#5_2: remove start and end in condition path, connect with , instead of -> (new version, update prompt)
-#5-3: log path, connect with ->
-#5-4: 5-2(new version, update prompt)==5_2
