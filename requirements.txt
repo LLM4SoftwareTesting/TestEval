@@ -1,0 +1,6 @@
+openai>=1.17.1
+google-generativeai>=0.5.2
+transformers>=4.39.3
+sortedcontainers
+textwrap
+pytest-cov>=5.0.0
