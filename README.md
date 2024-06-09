@@ -42,7 +42,7 @@ python format.py --mode overall --path {path_to_generated_tests}  #reformat test
 python eval_pathcov.py --path {path_to_formatted_generated_tests}  #evaluate correctness and coverage metrics
 ```
 
-### Run baselines: targeted branch coverage
+### Run baselines: targeted line/branch coverage
 
 ```bash
 python eval_base.py --path {path_to_formatted_generated_tests}  #evaluate targeted line/branch coverage for baselines: use the test cases generate from the overall coverage task
