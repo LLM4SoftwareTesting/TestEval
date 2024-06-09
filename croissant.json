@@ -1,0 +1,250 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "TestEval",
+  "description": "Dataset for 'TESTEVAL: Benchmarking Large Language Models for Test Case Generation'",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "citeAs": "@article{TestEval,title={TestEval: Benchmarking Large Language Models for Test Case Generation},author={Wang, Wenhan and Yang, Chenyuan and Wang, Zhijie and Huang, Yuheng and Chu, Zhaoyang and Song, Da and Zhang, Lingming and Chen, An Ran and Ma, Lei}year={2024}}",
+  "license": "MIT",
+  "url": "https://github.com/LLM4SoftwareTesting/TestEval",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repository",
+      "name": "github-repository",
+      "description": "TestEval repository.",
+      "contentUrl": "https://github.com/LLM4SoftwareTesting/TestEval",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "jsonl-files",
+      "name": "jsonl-files",
+      "description": "JSONL files are hosted on the GitHub repository.",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/jsonlines",
+      "includes": "data/*.jsonl"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "jsonl",
+      "name": "jsonl",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/task_num",
+          "name": "task_num",
+          "description": "Problem id in LeetCode",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "task_num"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/task_title",
+          "name": "task_title",
+          "description": "LeetCode problem title.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "task_title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/difficulty",
+          "name": "difficulty",
+          "description": "LeetCode problem difficulty: from 0 to 2 (easy, medium, hard).",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "difficulty"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/func_name",
+          "name": "func_name",
+          "description": "Defalt funtion name for the solution.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "func_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/description",
+          "name": "description",
+          "description": "LeetCode problem description.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/python_solution",
+          "name": "python_solution",
+          "description": "LeetCode problem solution in Python. The program under test.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "python_solution"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/blocks",
+          "name": "blocks",
+          "description": "The list for target branches.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "blocks"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/target_lines",
+          "name": "target_lines",
+          "description": "The list for target lines.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "target_lines"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/python_solution_instrumented",
+          "name": "python_solution_instrumented",
+          "description": "Add instrumentions to python_solution for recording execution paths.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "python_solution_instrumented"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/sampled_paths",
+          "name": "sampled_paths",
+          "description": "The list of target paths, the format is the same to the execution paths collected from python_solution_instrumented.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "sampled_paths"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "jsonl/sampled_condition_paths",
+          "name": "sampled_condition_paths",
+          "description": "The list of target paths, used in prompts.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "jsonl-files"
+            },
+            "extract": {
+              "column": "sampled_condition_paths"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
