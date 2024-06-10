@@ -37,6 +37,14 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
+Set environment variables
+
+```
+OPENAI_API_KEY: openai api key
+GOOGLE_API_KEY: gemini api key
+HUGGINGFACE_TOKEN: huggingface access token
+```
+
 ### Run experiments: overall coverage
 
 ```bash
