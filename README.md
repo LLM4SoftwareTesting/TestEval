@@ -2,9 +2,25 @@
 
 ## Data
 
+### Metadata
+
+| field name | data type | description |
+|------|------|------|
+| task_num | int | Problem id in LeetCode |
+| task_title | string | LeetCode problem title |
+| difficulty | int | LeetCode problem difficulty: from 0 (easy) to 2 (hard) |
+| func_name | string | Default function name for the solution |
+| description | string | LeetCode problem description |
+| python_solution | string | LeetCode problem solution in Python (the program under test) |
+| blocks | list | The list for target branches |
+| target_lines | list | The list for target lines |
+| python_solution_instrumented | string | Add instrumentations to python_solution for recording execution paths |
+| sampled_paths | list | The list of target paths, the format is the same as the execution paths collected from python_solution_instrumented |
+| sampled_condition_paths | list | The list of target paths, used in prompts |
+
 ## Quick Start
 
-Rrequirements: Python>=3.10
+Requirements: Python>=3.10
 
 Install dependencies
 
