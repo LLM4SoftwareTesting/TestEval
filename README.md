@@ -2,6 +2,15 @@
 
 ## Data
 
+### Dataset description
+
+| category | data |
+|------|------|
+| total programs under test | 210 |
+| total target lines | 1340 |
+| total target branches | 983 |
+| total target paths | 854 |
+
 ### Metadata
 
 | field name | data type | description |
