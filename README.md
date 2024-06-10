@@ -87,7 +87,25 @@ We encourage researchers to use their own test case generation pipeline other th
 
 Overall coverage:
 
-```python
-{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests'; list of generated test cases}
+```
+{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests': list of generated test cases}
+```
+
+Targeted line coverage: 
+
+```
+{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests': {target line number: test case for target line}}
+```
+
+Targeted branch coverage:
+
+```
+{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests': [{"start": branch start line, "end": branch end line, "test": test case for target branch}]}
+```
+
+Targeted path coverage:
+
+```
+{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests': list of generated test cases for each target path}
 ```
 
