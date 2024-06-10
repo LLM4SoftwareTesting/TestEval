@@ -4,6 +4,8 @@
 
 ## Quick Start
 
+Rrequirements: Python>=3.10
+
 Install dependencies
 
 ```bash
@@ -53,3 +55,14 @@ python eval_base.py --path {path_to_formatted_generated_tests}  #evaluate target
 ```bash
 python eval_pathcov_base.py --path {path_to_formatted_generated_tests}  #evaluate targeted line/branch coverage for baselines: use the test cases generate from the overall coverage task
 ```
+
+### Run your own pipeline
+
+We encourage researchers to use their own test case generation pipeline other than our prompt framework. If you run your own pipeline, your generated test case file should be formatted as:
+
+Overall coverage:
+
+```python
+{'task_num': LeetCode problem id, 'difficulty': LeetCode problem difficulty, 'func_name': solution function name, 'code': solution code, 'tests'; list of generated test cases}
+```
+
