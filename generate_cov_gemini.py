@@ -59,7 +59,7 @@ if __name__=='__main__':
 
     prompt_template=open('prompt/template_base.txt').read()
     system_template=open('prompt/system.txt').read()
-    system_message=system_template.format(lang=args.lang)
+    system_message=system_template.format(lang='python')
 
     generation_config = GenerationConfig(
             candidate_count=1,
@@ -74,16 +74,15 @@ if __name__=='__main__':
         func_name=data['func_name']
         desc=data['description']
         desc_noeg=remove_examples(desc)
-        code=data[f'{args.lang}_solution']
+        code=data['python_solution']
         difficulty=data['difficulty']
         code_withlineno=add_lineno(code)
         target_lines=data['target_lines']
 
         #generate test cases
-        if args.mode=='multiround':
-            prompt=prompt_template.format(lang=args.lang, program=code, description=desc, func_name=func_name)
-            prompt=system_message+prompt
-            generated_tests=testgeneration_multiround(args,model,prompt)
+        prompt=prompt_template.format(lang='python', program=code, description=desc, func_name=func_name)
+        prompt=system_message+prompt
+        generated_tests=testgeneration_multiround(args,model,prompt)
 
         testing_data={'task_num':data['task_num'],'task_title':data['task_title'],'func_name':func_name,'difficulty':difficulty,'code':code,'tests':generated_tests}
         testing_results.append(testing_data)
