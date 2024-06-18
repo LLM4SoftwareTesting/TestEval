@@ -93,13 +93,13 @@ if __name__=='__main__':
         data=dataset[i]
         func_name=data['func_name']
         desc=data['description']
-        code=data[f'{args.lang}_solution']
+        code=data['python_solution']
         difficulty=data['difficulty']
         code_withlineno=add_lineno(code)
         target_lines=data['target_lines']
         desc_noeg=remove_examples(desc)
 
-        prompt=prompt_template.format(lang=args.lang, program=code, description=desc_noeg, func_name=func_name)
+        prompt=prompt_template.format(lang='python', program=code, description=desc_noeg, func_name=func_name)
         generated_tests=testgeneration_multiround(args,prompt,system_message)
 
         testing_data={'task_num':data['task_num'],'task_title':data['task_title'],'func_name':func_name,'difficulty':difficulty,'code':code,'tests':generated_tests}
