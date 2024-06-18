@@ -88,7 +88,7 @@ if __name__=='__main__':
         target_lines=data['target_lines']
 
         #generate test case
-        prompt=prompt_template.format(lang=args.lang, program=code, description=desc_noeg, func_name=func_name)
+        prompt=prompt_template.format(lang='python', program=code, description=desc_noeg, func_name=func_name)
         generated_tests=testgeneration_multiround(args,prompt,system_message)
                    
         testing_data={'task_num':data['task_num'],'task_title':data['task_title'],'func_name':func_name,'difficulty':difficulty,'code':code,'tests':generated_tests}
