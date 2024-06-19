@@ -37,6 +37,12 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
+Create folder to store generated tests
+
+```bash
+mkdir predictions
+```
+
 Set environment variables
 
 ```
