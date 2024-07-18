@@ -1,0 +1,18 @@
+Please write a test method for the function '{func_name}' given the following program under test and function description. Your answer should only contain one test input.
+
+Program under test:
+----
+{program}
+----
+
+Function description for '{func_name}':
+----
+{description}
+----
+
+Your test case must cover the following execution path in function {func_name}. The path is a sequence of branch conditions. When executing your test case, each branch condition in the target execution path must be satisfied sequentially.
+Target execution path: {path}
+----
+Your test method should begin with:
+def test_{func_name}():
+    solution=Solution()
