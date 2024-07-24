@@ -1,5 +1,7 @@
 # TestEval
 
+Dataset and benchmark for paper "TESTEVAL: Benchmarking Large Language Models for Test Case Generation".
+
 ## Data
 
 ### Dataset description
