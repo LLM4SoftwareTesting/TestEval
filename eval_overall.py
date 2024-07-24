@@ -110,7 +110,6 @@ def check_correctness(generated_data,ks=[1, 2, 5]):
         difficulty=data['difficulty']
         func_name=data['func_name']
         code=data['code']
-        code=code #add possibly missing imports
         test_cases=data['tests']
         test_import=f'from tmp_{i}_{difficulty}.under_test import Solution\n'
         test_import_simple=f'from under_test import Solution\n'
