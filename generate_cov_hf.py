@@ -9,7 +9,7 @@ from transformers import LlamaForCausalLM, CodeLlamaTokenizer, AutoTokenizer, Au
 from transformers import pipeline
 access_token=os.getenv("HUGGINGFACE_TOKEN")
 
-from data_utils import read_jsonl, write_jsonl, add_lineno, remove_examples
+from data_utils import read_jsonl, write_jsonl, add_lineno
 
 
 def parse_args():
@@ -97,9 +97,8 @@ if __name__=='__main__':
         difficulty=data['difficulty']
         code_withlineno=add_lineno(code)
         target_lines=data['target_lines']
-        desc_noeg=remove_examples(desc)
 
-        prompt=prompt_template.format(lang='python', program=code, description=desc_noeg, func_name=func_name)
+        prompt=prompt_template.format(lang='python', program=code, description=desc, func_name=func_name)
         generated_tests=testgeneration_multiround(args,prompt,system_message)
 
         testing_data={'task_num':data['task_num'],'task_title':data['task_title'],'func_name':func_name,'difficulty':difficulty,'code':code,'tests':generated_tests}
