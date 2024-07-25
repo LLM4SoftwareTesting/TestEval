@@ -10,7 +10,7 @@ from transformers import LlamaForCausalLM, CodeLlamaTokenizer, AutoTokenizer, Au
 from transformers import pipeline
 access_token=os.getenv("HUGGINGFACE_TOKEN")
 
-from data_utils import read_jsonl, write_jsonl, add_lineno, remove_examples
+from data_utils import read_jsonl, write_jsonl, add_lineno
 
 def parse_args():
     parser = ArgumentParser()
