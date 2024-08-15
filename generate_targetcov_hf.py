@@ -49,7 +49,7 @@ if __name__=='__main__':
     system_template=open('prompt/system.txt').read()
     system_message=system_template.format(lang='python')
 
-    dataset=read_jsonl('LC_data/new-leetcode-bench-py.jsonl')
+    dataset=read_jsonl('data/leetcode-py.jsonl')
 
     model = AutoModelForCausalLM.from_pretrained(args.model, token=access_token, torch_dtype=torch.bfloat16, trust_remote_code=True, device_map='auto')
     tokenizer = AutoTokenizer.from_pretrained(args.model, token=access_token, torch_dtype=torch.bfloat16, trust_remote_code=True, device_map='auto')
