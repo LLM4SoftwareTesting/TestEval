@@ -1,0 +1,35 @@
+Given a Python code snippet and a target line number, you are asked to generate reasoning steps to satisfy a specific line to be executed.
+[Example]
+Given the following code snippet:
+```Python
+class Solution: #1
+    def twoSum(self, nums: List[int], target: int) -> List[int]:    #2
+        numMap = {{}} #3
+        n = len(nums)   #4
+    #5
+        for i in range(n):  #6
+            numMap[nums[i]] = i #7
+    #8
+        for i in range(n):  #9
+            complement = target - nums[i]   #10
+            if complement in numMap and numMap[complement] != i:    #11
+                return [i, numMap[complement]]  #12
+    #13
+        return []   #14
+```
+Identify when executing funtion twoSum, what conditions need to be satisfied if line 12 is to be executed.
+
+Answer:
+<cond>
+Step 1: If line 12 `return [i, numMap[complement]]` is executed, then the `if` condition `(complement in numMap and numMap[complement] != i)` in line 11 shoud be true.
+Step 2: If condition `complement in numMap` is true, at least one `target - nums[i]` in line 10 equals an element in nums, which means there exists two elements in `nums` that their sum is equal to `target`.
+Step 3: If condition `numMap[complement] != i` is ture, then `numMap[target - nums[i]] != i`, meaning that the index of `target - nums[i]` is not equal to `i`.
+Step 4: Generally, to execute line 12, we need to ensure that there exists two different elements in `nums` that their sum is equal to `target`.
+<\cond>
+[\Example]
+
+In a similar fashion, identify the conditions that need to be satisfied when line {targetline} is to be executed for the following Python code.
+```Python
+{program}
+```
+Surround your answer with <cond> and <\cond>.
