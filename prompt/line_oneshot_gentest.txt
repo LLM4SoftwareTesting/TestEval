@@ -1,0 +1,42 @@
+For the given code snippet and a list of conditions need to be satisfied, generate a test case that will satisfiy these conditions. Here is an example:
+[Example]
+Code:
+```Python
+class Solution: #1
+    def twoSum(self, nums: List[int], target: int) -> List[int]:    #2
+        numMap = {{}} #3
+        n = len(nums)   #4
+    #5
+        for i in range(n):  #6
+            numMap[nums[i]] = i #7
+    #8
+        for i in range(n):  #9
+            complement = target - nums[i]   #10
+            if complement in numMap and numMap[complement] != i:    #11
+                return [i, numMap[complement]]  #12
+    #13
+        return []   #14
+```
+Conditions:
+Step 1: If line 12 `return [i, numMap[complement]]` is executed, then the `if` condition `(complement in numMap and numMap[complement] != i)` in line 11 shoud be true.
+Step 2: If condition `complement in numMap` is true, at least one `target - nums[i]` in line 10 equals an element in nums, which means there exists two elements in `nums` that their sum is equal to `target`.
+Step 3: If condition `numMap[complement] != i` is ture, then `numMap[target - nums[i]] != i`, meaning that the index of `target - nums[i]` is not equal to `i`.
+Step 4: Generally, to execute line 12, we need to ensure that there exists two different elements in `nums` that their sum is equal to `target`.
+
+Generated test case:
+```Python
+def test_twoSum():
+    solution = Solution()
+    assert solution.twoSum([2,7,11,15], 9) == [0, 1]
+```
+[\Example]
+
+In a similar fashion, generate a test case for the following code snippet and conditions. Your test function should be named `test_{func_name}`.
+Code:
+```Python
+{program}
+```
+Conditions:
+{conditions}
+
+You should only generate the test case, without any additional explanation.
