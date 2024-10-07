@@ -69,6 +69,14 @@ python format.py --mode line --path {path_to_generated_tests}  #reformat test ca
 python eval_linecov.py --path {path_to_formatted_generated_tests}  #evaluate correctness and coverage metrics
 ```
 
+### Run experiments: targeted line coverage with two-step reasoning
+
+```bash
+python gen_linecov_cot_{openai/hf}.py --model {model_name} #generate reasoning steps and raw test cases
+python format.py --mode line --path {path_to_generated_tests}  #reformat test cases
+python eval_linecov.py --path {path_to_formatted_generated_tests}  #evaluate correctness and coverage metrics
+```
+
 ### Run experiments: targeted branch coverage
 
 ```bash
