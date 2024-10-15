@@ -74,7 +74,7 @@ if __name__=='__main__':
             #print(log_path, condition_path)
             path_prompt=generate_path(condition_path)
 
-            prompt=prompt_template.format(func_name=func_name, description=desc_noeg, program=code_withlineno, path=path_prompt)
+            prompt=prompt_template.format(func_name=func_name, description=desc, program=code_withlineno, path=path_prompt)
             if args.model in models_nosys: #models don't support system message
                 messages=[{"role": "user", "content": system_message+prompt}]
             else:
