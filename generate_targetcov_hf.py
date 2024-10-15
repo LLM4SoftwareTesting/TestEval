@@ -118,7 +118,7 @@ if __name__=='__main__':
                 target_branch_withlineno='\n'.join(target_lines)
                 branch_input="\n'''\n"+target_branch_withlineno+"\n'''"
 
-                prompt=prompt_template_branch.format(lang='python', program=code_input, description=desc_noeg, func_name=func_name, branch=branch_input)
+                prompt=prompt_template_branch.format(lang='python', program=code_input, description=desc, func_name=func_name, branch=branch_input)
                 if args.model in models_nosys: #models don't support system message
                     messages=[{"role": "user", "content": system_message+prompt}]
                 else:
