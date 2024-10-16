@@ -9,7 +9,7 @@ from pathlib import Path
 from argparse import ArgumentParser
 from tqdm import tqdm
 
-from data_utils import read_jsonl, write_jsonl, add_lineno, remove_examples
+from data_utils import read_jsonl, write_jsonl, add_lineno
 from prompt_utils import generate_path
 
 genai.configure(api_key=api_key)
