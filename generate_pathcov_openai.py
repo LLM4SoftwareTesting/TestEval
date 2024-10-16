@@ -6,7 +6,7 @@ from openai import OpenAI
 openai.api_key=os.getenv("OPENAI_API_KEY") #personal key
 client=OpenAI(api_key=openai.api_key)
 from pathlib import Path
-from data_utils import read_jsonl, write_jsonl, add_lineno, remove_examples
+from data_utils import read_jsonl, write_jsonl, add_lineno
 from prompt_utils import generate_path
 
 def parse_args():
