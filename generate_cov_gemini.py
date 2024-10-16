@@ -73,7 +73,7 @@ if __name__=='__main__':
         data=dataset[i]
         func_name=data['func_name']
         desc=data['description']
-        desc_noeg=remove_examples(desc)
+        
         code=data['python_solution']
         difficulty=data['difficulty']
         code_withlineno=add_lineno(code)
