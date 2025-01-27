@@ -37,7 +37,7 @@ def execute(test_code,timeout=5):
             exec(test_code, globals()) #add globals() to avoid name errors related to import
             return True
     except AssertionError: #assertionerror is considered as executable
-        return True
+        return 'assertion error'
     except TimeoutError:
         #print("timed out")
         return False
@@ -104,7 +104,7 @@ def eval_correctness(generated_data):
                 test_code=test_import+testcase+f'\ntest_{func_name}()'
                 time.sleep(0.01)
                 res=execute(test_code) #check execution correctness
-                if res==True:
+                if res!=False:
                     if test_code.find(f'solution.{func_name}')==-1: #if the function under test is not called, also consider as failed
                         print('func under test not called')
                         exec_fails.append({'task':task_num, 'error':'not called'})
